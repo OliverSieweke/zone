@@ -1,4 +1,4 @@
-console.log("BG script is LOGGING", document);
+console.log("BG script is LOGGING");
 
 //============SERVICE WORKER ===========================================
 chrome.runtime.onInstalled.addListener(() => {
@@ -8,7 +8,15 @@ chrome.runtime.onInstalled.addListener(() => {
 //======================================================
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("REQUEST: ", request);
-    request.treeSound.play();
+    chrome.windows.create({
+        type: "popup",
+        focused: false,
+        top: 1,
+        left: 1,
+        height: 1,
+        width: 1,
+        url: chrome.runtime.getURL("audio.html"),
+    });
 });
 
 //======================================================
